@@ -1,0 +1,77 @@
+---
+interface Props {
+  text?: string;
+  delay?: number;
+  spacing?: number;
+  followMouseDirection?: boolean;
+  randomFloat?: boolean;
+  exitDuration?: number;
+  removalInterval?: number;
+  maxPoints?: number;
+}
+
+const {
+  text = '⚛️',
+  delay = 0.01,
+  spacing = 100,
+  followMouseDirection = true,
+  randomFloat = true,
+  exitDuration = 0.5,
+  removalInterval = 30,
+  maxPoints = 5
+} = Astro.props;
+---
+
+<div class="text-cursor-wrapper">
+  <text-cursor
+    text={text}
+    delay={delay}
+    spacing={spacing}
+    follow-mouse-direction={followMouseDirection ? 'true' : 'false'}
+    random-float={randomFloat ? 'true' : 'false'}
+    exit-duration={exitDuration}
+    removal-interval={removalInterval}
+    max-points={maxPoints}
+  />
+  <div class="mid-text">Hover here!</div>
+</div>
+
+
+
+<script>
+  // Import the web component
+  import '../js-components/text-cursor.js';
+</script>
+
+<style>
+  .text-cursor-wrapper {
+    background: #060606;
+    border: 1px solid #ffffff1c;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 1em;
+    padding: 1em;
+    display: flex;
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+  }
+
+  text-cursor{
+    width: 100%;
+    height: 100%;
+  }
+
+  .mid-text {
+    pointer-events: none;
+    position: absolute;
+    text-align: center;
+    font-size: 4rem;
+    margin: auto;
+    font-weight: 900;
+    user-select: none;
+    color: rgb(34, 34, 34);
+  }
+</style>
