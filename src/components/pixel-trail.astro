@@ -1,0 +1,75 @@
+---
+interface Props {
+  gridSize?: number;
+  trailSize?: number;
+  maxAge?: number;
+  interpolate?: number;
+  color?: string;
+  gooeyFilter?: boolean;
+  gooeyFilterId?: string;
+  gooeyFilterStrength?: number;
+}
+
+const {
+  gridSize = 40,
+  trailSize = 0.1,
+  maxAge = 250,
+  interpolate = 5,
+  color = '#ffffff',
+  gooeyFilter = false,
+  gooeyFilterId = 'goo-filter',
+  gooeyFilterStrength = 10
+} = Astro.props;
+---
+
+<div class="pixel-trail-wrapper">
+  <pixel-trail
+    grid-size={gridSize}
+    trail-size={trailSize}
+    max-age={maxAge}
+    interpolate={interpolate}
+    color={color}
+    gooey-filter={gooeyFilter ? 'true' : 'false'}
+    gooey-filter-id={gooeyFilterId}
+    gooey-filter-strength={gooeyFilterStrength}
+  ></pixel-trail>
+  <div class="overlay-text">Move your mouse here</div>
+</div>
+
+<script>
+  // Import the web component
+  import '../js-components/pixel-trail.js';
+</script>
+
+<style>
+  .pixel-trail-wrapper {
+    background: #060606;
+    border: 1px solid #ffffff1c;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 1em;
+    padding: 1em;
+    display: flex;
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+  }
+
+  pixel-trail {
+    width: 100%;
+    height: 100%;
+  }
+
+  .overlay-text {
+    pointer-events: none;
+    position: absolute;
+    text-align: center;
+    font-size: 2rem;
+    margin: auto;
+    font-weight: 900;
+    user-select: none;
+    color: rgba(255, 255, 255, 0.1);
+  }
+</style>

@@ -11,9 +11,13 @@
   },
   "dependencies": {
     "@astrojs/starlight": "^0.32.5",
+    "@react-spring/web": "^9.7.5",
     "astro": "^5.5.3",
     "framer-motion": "^11.18.2",
+    "gsap": "^3.12.7",
+    "matter-js": "^0.20.0",
     "motion": "^12.6.3",
-    "sharp": "^0.32.5"
+    "sharp": "^0.32.5",
+    "three": "^0.167.1"
   }
 }
