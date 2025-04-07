@@ -5,6 +5,7 @@ description: Animated text that reveals with a blur effect
 
 import { Card } from '@astrojs/starlight/components';
 import BlurText from '../../../components/blur-text.astro';
+import ExampleWrapper from '../../../components/ExampleWrapper.astro';
 
 # Blur Text
 
@@ -33,45 +34,50 @@ import BlurText from '../components/blur-text.astro';
 
 ## Props
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `text` | `string` | `'This is a blur text animation example'` | The text to display and animate |
-| `delay` | `number` | `200` | Delay between each element's animation (in milliseconds) |
-| `animateBy` | `'words'` \| `'letters'` | `'words'` | Whether to animate by words or individual letters |
-| `direction` | `'top'` \| `'bottom'` | `'top'` | Direction from which the text appears |
-| `threshold` | `number` | `0.1` | Intersection observer threshold (0.0 to 1.0) |
-| `rootMargin` | `string` | `'0px'` | Intersection observer root margin |
-| `easing` | `string` | `'cubic-bezier(0.215, 0.61, 0.355, 1)'` | Animation easing function |
-| `class` | `string` | `''` | Additional CSS classes to apply to the wrapper |
-
-## Examples with Different Settings
-
 ### Animate by Letters
 
-<BlurText 
-  text="Letter by letter animation" 
-  animateBy="letters" 
-  delay={50}
-/>
+<ExampleWrapper id="example-letters">
+  <blur-text 
+    text="Letter by letter animation" 
+    animate-by="letters" 
+    delay="50"
+  ></blur-text>
+</ExampleWrapper>
 
 ### Bottom Direction
 
-<BlurText 
-  text="Animating from the bottom" 
-  direction="bottom" 
-/>
+<ExampleWrapper id="example-bottom">
+  <blur-text 
+    text="Animating from the bottom" 
+    direction="bottom"
+  ></blur-text>
+</ExampleWrapper>
 
 ### Slower Animation
 
-<BlurText 
-  text="This animation has a longer delay between words" 
-  delay={400}
-/>
+<ExampleWrapper id="example-slower">
+  <blur-text 
+    text="This animation has a longer delay between words" 
+    delay="400"
+  ></blur-text>
+</ExampleWrapper>
 
 ## Technical Details
 
-The Blur Text component uses the Motion Dev animation library and Intersection Observer API to create smooth, performant animations that only trigger when the component enters the viewport.
+The BlurText component uses the Motion Dev library to animate text elements. It can animate text either by individual letters or by words, depending on the `animateBy` prop.
 
-<Card title="Accessibility Note">
-  While animations can enhance user experience, they may cause issues for users with vestibular disorders or motion sensitivity. Consider providing a way for users to disable animations in your application.
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `text` | string | `''` | The text to animate |
+| `animateBy` | string | `'words'` | Animation method: `'words'` or `'letters'` |
+| `direction` | string | `'top'` | Direction of animation: `'top'` or `'bottom'` |
+| `delay` | number | `50` | Delay between each word/letter animation in milliseconds |
+| `class` | string | `''` | Additional CSS classes |
+
+## Accessibility
+
+<Card title="Animation Considerations">
+  This component includes animations that may be problematic for users with vestibular disorders or those who prefer reduced motion. The animations respect the user's `prefers-reduced-motion` setting.
 </Card>

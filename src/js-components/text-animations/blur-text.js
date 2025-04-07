@@ -100,13 +100,19 @@ class BlurText extends HTMLElement {
     const container = this.shadowRoot.querySelector('.blur-text-container');
     if (!container) return;
     
-    // Clear previous content
+    // Clear previous content and arrays
     container.innerHTML = '';
+    this.animatedElements = [];
     
     // Split text by words or letters
     this.elements = this.animateBy === 'words' 
       ? this.text.split(' ') 
       : this.text.split('');
+    
+    // Create a wrapper for all elements to ensure proper layout
+    const wrapper = document.createElement('div');
+    wrapper.className = 'blur-text-wrapper';
+    container.appendChild(wrapper);
     
     // Create spans for each element
     this.elements.forEach((element, index) => {
@@ -125,7 +131,7 @@ class BlurText extends HTMLElement {
         span.innerHTML += '&nbsp;';
       }
       
-      container.appendChild(span);
+      wrapper.appendChild(span);
       this.animatedElements.push(span);
     });
     
@@ -143,12 +149,20 @@ class BlurText extends HTMLElement {
     const initialY = this.direction === 'top' ? -50 : 50;
     const midY = this.direction === 'top' ? 5 : -5;
     
+    // Reset all elements to initial state first
+    elements.forEach(element => {
+      element.style.opacity = '0';
+      element.style.filter = 'blur(10px)';
+      element.style.transform = `translate3d(0,${initialY}px,0)`;
+    });
+    
     // Animate each element individually with staggered delay
     elements.forEach((element, index) => {
       // Calculate staggered delay based on index
-      const delay = index * this.delay;
+      // this.delay is in milliseconds, but Motion's delay is in seconds
+      const delayMs = index * (this.delay / 1000);
       
-      // Animate the element
+      // Animate the element with a sequence
       animate(element, {
         filter: ['blur(10px)', 'blur(5px)', 'blur(0px)'],
         opacity: [0, 0.5, 1],
@@ -158,7 +172,7 @@ class BlurText extends HTMLElement {
           'translate3d(0,0,0)'
         ]
       }, { 
-        delay: delay,
+        delay: delayMs,
         easing: this.easing,
         duration: 0.8
       });
@@ -170,6 +184,8 @@ class BlurText extends HTMLElement {
       <style>
         :host {
           display: block;
+          width: 100%;
+          height: 100%;
         }
         
         .blur-text-container {
@@ -177,14 +193,26 @@ class BlurText extends HTMLElement {
           font-size: inherit;
           color: inherit;
           line-height: inherit;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+        }
+        
+        .blur-text-wrapper {
+          display: inline-block;
+          width: 100%;
         }
         
         .blur-text-element {
           display: inline-block;
           will-change: transform, filter, opacity;
+          margin-right: 0.1em;
         }
       </style>
-      <p class="blur-text-container"></p>
+      <div class="blur-text-container"></div>
     `;
   }
 }

@@ -1,0 +1,81 @@
+---
+// Simple props that don't require complex objects
+interface Props {
+  target: string;  // ID of the target element
+  component: string;  // Web component name
+}
+
+const { target, component } = Astro.props;
+---
+
+<button class="replay-button" data-target={target} data-component={component}>
+  Replay Animation
+</button>
+
+<script>
+  // Initialize all replay buttons
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.replay-button').forEach(button => {
+      button.addEventListener('click', (e) => {
+        const btn = e.currentTarget as HTMLElement;
+        const targetId = btn.getAttribute('data-target');
+        const componentName = btn.getAttribute('data-component');
+        
+        if (!targetId || !componentName) return;
+        
+        const target = document.getElementById(targetId);
+        if (!target) return;
+        
+        // Get all the attributes from the existing component
+        const originalComponent = target.querySelector('.example-animation');
+        if (!originalComponent) return;
+        
+        // Store all attributes
+        const attributes: Record<string, string> = {};
+        for (const attr of originalComponent.attributes) {
+          if (attr.name !== 'class' && attr.name !== 'style') {
+            attributes[attr.name] = attr.value;
+          }
+        }
+        
+        // Remove the old component
+        originalComponent.remove();
+        
+        // Create a new component
+        setTimeout(() => {
+          const newComponent = document.createElement(componentName);
+          newComponent.className = 'example-animation';
+          
+          // Set all attributes
+          Object.entries(attributes).forEach(([name, value]) => {
+            newComponent.setAttribute(name, value);
+          });
+          
+          // Insert before the button
+          target.insertBefore(newComponent, btn);
+        }, 10);
+      });
+    });
+  });
+</script>
+
+<style>
+  .replay-button {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+    z-index: 10;
+  }
+  
+  .replay-button:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+</style>
