@@ -7,8 +7,6 @@ import { Card } from '@astrojs/starlight/components';
 import BlurText from '../../../components/blur-text.astro';
 import ExampleWrapper from '../../../components/ExampleWrapper.astro';
 
-# Blur Text
-
 The Blur Text component creates an engaging text reveal animation with a blur effect. Text elements (words or individual letters) appear with a smooth transition from blurred to sharp, creating a dynamic and attention-grabbing effect.
 
 ## Features
@@ -22,6 +20,16 @@ The Blur Text component creates an engaging text reveal animation with a blur ef
 
 <BlurText text="This text animates with a blur effect" />
 
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `text` | string | `''` | The text to animate |
+| `animateBy` | string | `'words'` | Animation method: `'words'` or `'letters'` |
+| `direction` | string | `'top'` | Direction of animation: `'top'` or `'bottom'` |
+| `delay` | number | `50` | Delay between each word/letter animation in milliseconds |
+| `class` | string | `''` | Additional CSS classes |
+
 ## Usage
 
 ```astro
@@ -31,8 +39,6 @@ import BlurText from '../components/blur-text.astro';
 
 <BlurText text="Your text here" />
 ```
-
-## Props
 
 ### Animate by Letters
 
@@ -65,16 +71,6 @@ import BlurText from '../components/blur-text.astro';
 ## Technical Details
 
 The BlurText component uses the Motion Dev library to animate text elements. It can animate text either by individual letters or by words, depending on the `animateBy` prop.
-
-## Props
-
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `text` | string | `''` | The text to animate |
-| `animateBy` | string | `'words'` | Animation method: `'words'` or `'letters'` |
-| `direction` | string | `'top'` | Direction of animation: `'top'` or `'bottom'` |
-| `delay` | number | `50` | Delay between each word/letter animation in milliseconds |
-| `class` | string | `''` | Additional CSS classes |
 
 ## Accessibility
 
