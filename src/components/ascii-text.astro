@@ -1,0 +1,118 @@
+---
+interface Props {
+  text?: string;
+  asciiFontSize?: number;
+  textFontSize?: number;
+  textColor?: string;
+  planeBaseHeight?: number;
+  enableWaves?: boolean;
+}
+
+const {
+  text = 'ASCII',
+  asciiFontSize = 8,
+  textFontSize = 200,
+  textColor = '#fdf9f3',
+  planeBaseHeight = 8,
+  enableWaves = true
+} = Astro.props;
+---
+
+<div class="ascii-text-wrapper">
+  <div class="component-container">
+    <ascii-text
+      id="ascii-text-component"
+      text={text}
+      ascii-font-size={asciiFontSize}
+      text-font-size={textFontSize}
+      text-color={textColor}
+      plane-base-height={planeBaseHeight}
+      enable-waves={enableWaves ? 'true' : 'false'}
+    ></ascii-text>
+    <button class="reload-btn" onclick="replayAnimation()">Replay Animation</button>
+  </div>
+</div>
+
+<script is:inline>
+  function replayAnimation() {
+    const container = document.querySelector('.component-container');
+    const oldComponent = document.getElementById('ascii-text-component');
+    const props = {};
+    
+    // Capture all current attributes
+    Array.from(oldComponent.attributes).forEach(attr => {
+      if (attr.name !== 'id') {
+        props[attr.name] = attr.value;
+      }
+    });
+    
+    // Remove old component
+    oldComponent.remove();
+    
+    // Create new component with same props
+    setTimeout(() => {
+      const newComponent = document.createElement('ascii-text');
+      newComponent.id = 'ascii-text-component';
+      
+      // Set all the props
+      Object.entries(props).forEach(([name, value]) => {
+        newComponent.setAttribute(name, value);
+      });
+      
+      // Insert before the button
+      container.insertBefore(newComponent, container.querySelector('.reload-btn'));
+    }, 10);
+  }
+</script>
+
+<script>
+  // Import the web component
+  import '../js-components/text-animations/ascii-text.js';
+</script>
+
+<style>
+  .ascii-text-wrapper {
+    background: #060606;
+    border: 1px solid #ffffff1c;
+    border-radius: 20px;
+    width: 100%;
+    margin-top: 1em;
+    padding: 1em;
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+  }
+
+  .component-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  ascii-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .reload-btn {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+    z-index: 10;
+  }
+  
+  .reload-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+</style>

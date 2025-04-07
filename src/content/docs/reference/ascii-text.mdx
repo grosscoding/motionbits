@@ -1,0 +1,66 @@
+---
+title: ASCII Text
+description: Transform text into an interactive ASCII art display with 3D effects
+---
+
+import { Card } from '@astrojs/starlight/components';
+import AsciiText from '../../../components/ascii-text.astro';
+
+# ASCII Text
+
+The ASCII Text component transforms regular text into an interactive ASCII art display with 3D effects. As you move your mouse over the component, the text reacts to your movements, creating a dynamic and engaging visual experience.
+
+## Features
+
+- Converts text to ASCII characters
+- Interactive 3D rotation following mouse movement
+- Optional wave animation effect
+- Color gradient effects that follow mouse direction
+- Customizable font sizes and colors
+
+## Example
+
+<AsciiText text="ASCII" />
+
+## Usage
+
+```astro
+---
+import AsciiText from '../components/ascii-text.astro';
+---
+
+<AsciiText text="Hello" />
+```
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `text` | `string` | `'ASCII'` | The text to display |
+| `asciiFontSize` | `number` | `8` | Font size of the ASCII characters |
+| `textFontSize` | `number` | `200` | Font size of the original text (affects the overall size) |
+| `textColor` | `string` | `'#fdf9f3'` | Color of the text |
+| `planeBaseHeight` | `number` | `8` | Base height of the 3D plane |
+| `enableWaves` | `boolean` | `true` | Enable wave animation effects |
+
+## Examples with Different Settings
+
+### Larger ASCII Font
+
+<AsciiText text="BIG" asciiFontSize={12} />
+
+### Without Wave Effects
+
+<AsciiText text="STATIC" enableWaves={false} />
+
+### Different Color
+
+<AsciiText text="COLOR" textColor="#ff6188" />
+
+## Technical Details
+
+This component uses Three.js for 3D rendering and custom shader code to create the ASCII art effect. The text is rendered to a canvas, then converted to a texture applied to a 3D plane. The ASCII effect is achieved by sampling the rendered image and mapping pixel brightness to ASCII characters.
+
+<Card title="Performance Note">
+  This component is relatively resource-intensive due to the 3D rendering and ASCII conversion. For best performance, avoid using multiple instances on a single page.
+</Card>

@@ -1,0 +1,115 @@
+---
+interface Props {
+  text?: string;
+  delay?: number;
+  animateBy?: 'words' | 'letters';
+  direction?: 'top' | 'bottom';
+  threshold?: number;
+  rootMargin?: string;
+  easing?: string;
+  class?: string;
+}
+
+const {
+  text = 'This is a blur text animation example',
+  delay = 200,
+  animateBy = 'words',
+  direction = 'top',
+  threshold = 0.1,
+  rootMargin = '0px',
+  easing = 'cubic-bezier(0.215, 0.61, 0.355, 1)', // easeOutCubic
+  class: className = ''
+} = Astro.props;
+---
+
+<div class={`blur-text-wrapper ${className}`}>
+  <div class="component-container">
+    <blur-text
+      id="blur-text-component"
+      text={text}
+      delay={delay}
+      animate-by={animateBy}
+      direction={direction}
+      threshold={threshold}
+      root-margin={rootMargin}
+      easing={easing}
+    ></blur-text>
+    <button class="reload-btn" onclick="replayAnimation()">Replay Animation</button>
+  </div>
+</div>
+
+<script is:inline>
+  function replayAnimation() {
+    const container = document.querySelector('.component-container');
+    const oldComponent = document.getElementById('blur-text-component');
+    const props = {};
+    
+    // Capture all current attributes
+    Array.from(oldComponent.attributes).forEach(attr => {
+      if (attr.name !== 'id') {
+        props[attr.name] = attr.value;
+      }
+    });
+    
+    // Remove old component
+    oldComponent.remove();
+    
+    // Create new component with same props
+    setTimeout(() => {
+      const newComponent = document.createElement('blur-text');
+      newComponent.id = 'blur-text-component';
+      
+      // Set all the props
+      Object.entries(props).forEach(([name, value]) => {
+        newComponent.setAttribute(name, value);
+      });
+      
+      // Insert before the button
+      container.insertBefore(newComponent, container.querySelector('.reload-btn'));
+    }, 10);
+  }
+</script>
+
+<script>
+  // Import the web component
+  import '../js-components/text-animations/blur-text.js';
+</script>
+
+<style>
+  .blur-text-wrapper {
+    font-size: 1.5rem;
+    line-height: 1.5;
+    height: 400px;
+    background: #000;
+    padding: 1rem;
+    color: var(--text-color, #ffffff);
+    position: relative;
+  }
+  
+  .component-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .reload-btn {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+  }
+  
+  .reload-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+</style>

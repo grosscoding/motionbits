@@ -28,13 +28,39 @@ This document outlines the process of transforming React components with Framer 
     *   Create a corresponding Astro component in `src/components/` (e.g., `src/components/my-component-name.astro`).
     *   Import the Web Component's JavaScript file using a `<script>` tag *within* the Astro component.
     *   Use the custom element tag (e.g., `<my-component-name>`) in the Astro template, passing props as attributes. Ensure `client:only="lit"` or similar client-side directive is used if interaction is needed immediately on load, though for basic web components, just importing the script might be enough.
+    *   Add a reload button to allow replaying animations. This can be implemented with a simple button that either:
+        * Reloads the component by toggling its visibility
+        * Calls a public method on the Web Component to reset and replay the animation
+        * Example implementation:
+        ```astro
+        <div class="component-wrapper">
+          <my-component-name id="my-component"></my-component-name>
+          <button class="reload-btn" onclick="document.getElementById('my-component').remove(); setTimeout(() => document.querySelector('.component-wrapper').innerHTML += '<my-component-name id="my-component"></my-component-name>', 10);">Replay Animation</button>
+        </div>
+        ```
 8.  **Document in MDX:**
     *   Create a corresponding MDX file in `src/content/docs/reference/` (e.g., `src/content/docs/reference/my-component-name.mdx`).
     *   Document the component's usage, props (attributes), and provide examples, similar to `text-cursor.mdx`.
 
 ## Components to Transform (Initial Focus: TextAnimations)
 
--   [ ] `reactbits/TextAnimations/TextCursor` -> `src/js-components/text-animations/text-cursor.js` (Done - Example)
--   [ ] `reactbits/TextAnimations/FadeUp` -> `src/js-components/text-animations/fade-up.js`
--   [ ] `reactbits/TextAnimations/TextMask` -> `src/js-components/text-animations/text-mask.js`
--   [ ] ... (Add other components as needed)
+-   [x] `reactbits/TextAnimations/TextCursor` -> `src/js-components/text-animations/text-cursor.js` (Done - Example)
+-   [x] `reactbits/TextAnimations/ASCIIText` -> `src/js-components/text-animations/ascii-text.js`
+-   [x] `reactbits/TextAnimations/BlurText` -> `src/js-components/text-animations/blur-text.js`
+-   [ ] `reactbits/TextAnimations/CircularText` -> `src/js-components/text-animations/circular-text.js`
+-   [ ] `reactbits/TextAnimations/CountUp` -> `src/js-components/text-animations/count-up.js`
+-   [ ] `reactbits/TextAnimations/DecryptedText` -> `src/js-components/text-animations/decrypted-text.js`
+-   [ ] `reactbits/TextAnimations/FallingText` -> `src/js-components/text-animations/falling-text.js`
+-   [ ] `reactbits/TextAnimations/FuzzyText` -> `src/js-components/text-animations/fuzzy-text.js`
+-   [ ] `reactbits/TextAnimations/GlitchText` -> `src/js-components/text-animations/glitch-text.js`
+-   [ ] `reactbits/TextAnimations/GradientText` -> `src/js-components/text-animations/gradient-text.js`
+-   [ ] `reactbits/TextAnimations/PixelTrail` -> `src/js-components/text-animations/pixel-trail.js`
+-   [ ] `reactbits/TextAnimations/RotatingText` -> `src/js-components/text-animations/rotating-text.js`
+-   [ ] `reactbits/TextAnimations/ScrollFloat` -> `src/js-components/text-animations/scroll-float.js`
+-   [ ] `reactbits/TextAnimations/ScrollReveal` -> `src/js-components/text-animations/scroll-reveal.js`
+-   [ ] `reactbits/TextAnimations/ScrollVelocity` -> `src/js-components/text-animations/scroll-velocity.js`
+-   [ ] `reactbits/TextAnimations/ShinyText` -> `src/js-components/text-animations/shiny-text.js`
+-   [ ] `reactbits/TextAnimations/SplitText` -> `src/js-components/text-animations/split-text.js`
+-   [ ] `reactbits/TextAnimations/TextPressure` -> `src/js-components/text-animations/text-pressure.js`
+-   [ ] `reactbits/TextAnimations/TrueFocus` -> `src/js-components/text-animations/true-focus.js`
+-   [ ] `reactbits/TextAnimations/VariableProximity` -> `src/js-components/text-animations/variable-proximity.js`
