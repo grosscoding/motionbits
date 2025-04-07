@@ -30,15 +30,31 @@ The Blur Text component creates an engaging text reveal animation with a blur ef
 | `delay` | number | `50` | Delay between each word/letter animation in milliseconds |
 | `class` | string | `''` | Additional CSS classes |
 
-## Usage
+## Code Examples
 
-```astro
----
-import BlurText from '../components/blur-text.astro';
----
+import { Tabs, TabItem, Code } from '@astrojs/starlight/components';
+import jsFileContent from '../../../js-components/text-animations/blur-text.js?raw';
 
-<BlurText text="Your text here" />
-```
+<Tabs>
+  <TabItem label="Usage">
+  ```astro
+  ---
+  import BlurText from '../components/blur-text.astro';
+  ---
+
+  <BlurText 
+    text="Your text here" 
+    animateBy="words"
+    direction="top"
+    delay={50}
+  />
+  ```
+  </TabItem>
+  <TabItem label="Component Code">
+  <Code code={jsFileContent} lang="js" />
+  </TabItem>
+  <TabItem label="TBD - Component Code (Tailwind)"></TabItem>
+</Tabs>
 
 ### Animate by Letters
 
@@ -67,10 +83,6 @@ import BlurText from '../components/blur-text.astro';
     delay="400"
   ></blur-text>
 </ExampleWrapper>
-
-## Technical Details
-
-The BlurText component uses the Motion Dev library to animate text elements. It can animate text either by individual letters or by words, depending on the `animateBy` prop.
 
 ## Accessibility
 
