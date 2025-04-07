@@ -23,7 +23,7 @@ class PixelTrail extends HTMLElement {
     
     // Bind methods
     this.handleMouseMove = this.handleMouseMove.bind(this);
-    this.render = this.render.bind(this);
+    this.renderHTML = this.renderHTML.bind(this);
     this.animate = this.animate.bind(this);
     this.updateTrailTexture = this.updateTrailTexture.bind(this);
     this.initThree = this.initThree.bind(this);

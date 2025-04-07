@@ -1,0 +1,95 @@
+---
+title: Pixel Trail
+description: An interactive pixel grid that follows mouse movement with customizable effects
+---
+
+import { Card } from '@astrojs/starlight/components';
+import PixelTrail from '../../../components/pixel-trail.astro';
+import ExampleWrapper from '../../../components/ExampleWrapper.astro';
+
+A visually engaging component that creates a grid of pixels that respond to mouse movement, leaving a trail effect. The component uses WebGL and Three.js to render a customizable pixel grid that follows your cursor with smooth animations.
+
+## Features
+
+- Interactive pixel grid that follows mouse movement
+- Customizable grid size, trail size, and animation duration
+- Optional gooey filter effect for smoother, more fluid animations
+- Customizable color for the pixel trail
+- Works with both mouse and touch events
+- Optimized WebGL rendering for smooth performance
+
+## Example
+
+<PixelTrail gridSize={40} trailSize={0.1} maxAge={250} interpolate={5} color="#00d8ff" />
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `grid-size` | number | `40` | Size of the pixel grid (higher values create smaller pixels) |
+| `trail-size` | number | `0.1` | Size of the trail effect (0.0 to 1.0) |
+| `max-age` | number | `250` | Duration in milliseconds before trail points fade out |
+| `interpolate` | number | `5` | Smoothness of the trail animation (higher values create smoother trails) |
+| `color` | string | `'#ffffff'` | Color of the pixel trail |
+| `gooey-filter` | boolean | `false` | Whether to apply a gooey filter effect to the trail |
+| `gooey-filter-id` | string | `'goo-filter'` | ID for the SVG filter (useful when multiple instances exist) |
+| `gooey-filter-strength` | number | `10` | Strength of the gooey filter effect |
+
+## Code Examples
+
+import { Tabs, TabItem, Code } from '@astrojs/starlight/components';
+import jsFileContent from '../../../js-components/text-animations/pixel-trail.js?raw';
+
+<Tabs>
+  <TabItem label="Usage">
+  ```html
+  <pixel-trail 
+    grid-size="40" 
+    trail-size="0.1"
+    max-age="250"
+    interpolate="5"
+    color="#ffffff"
+    gooey-filter="false"
+  ></pixel-trail>
+  ```
+  </TabItem>
+  <TabItem label="Component Code">
+  <Code code={jsFileContent} lang="js" />
+  </TabItem>
+  <TabItem label="TBD - Component Code (Tailwind)"></TabItem>
+</Tabs>
+
+## Examples with Different Settings
+
+### Larger Pixels with Gooey Effect
+
+<ExampleWrapper id="pixel-trail-gooey">
+  <pixel-trail 
+    grid-size="20" 
+    trail-size="0.2"
+    max-age="300"
+    color="#00ffcc"
+    gooey-filter="true"
+    gooey-filter-strength="8"
+  ></pixel-trail>
+</ExampleWrapper>
+
+### Smaller Pixels with Blue Color
+
+<ExampleWrapper id="pixel-trail-blue">
+  <pixel-trail 
+    grid-size="60" 
+    trail-size="0.08"
+    max-age="200"
+    color="#4488ff"
+  ></pixel-trail>
+</ExampleWrapper>
+
+## Accessibility
+
+<Card title="Accessibility Considerations">
+  - This component is primarily visual and relies on mouse/touch interaction
+  - The component does not convey essential information and is decorative in nature
+  - Consider providing alternative content or controls for users who may not be able to use mouse/touch interactions
+  - Ensure sufficient color contrast if using the component over content that needs to be readable
+</Card>
