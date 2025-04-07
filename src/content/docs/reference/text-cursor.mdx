@@ -1,21 +1,63 @@
 ---
 title: Text Cursor
-description: Use any icon as cursor
+description: Create a trail of icons following the cursor movement
 ---
 
 import { Card } from '@astrojs/starlight/components';
 import TextCursor from '../../../components/text-cursor.astro';
+import ExampleWrapper from '../../../components/ExampleWrapper.astro';
 
-Reference pages are ideal for outlining how things work in terse and clear terms.
-Less concerned with telling a story or addressing a specific use case, they should give a comprehensive outline of what you're documenting.
+<script>
+  // Import the web component to ensure it's available
+  import '../../../js-components/text-animations/text-cursor.js';
+</script>
 
-## Further reading
+The Text Cursor component creates an interactive trail of icons or emojis that follow the user's cursor movement. This creates a playful and engaging interaction that can add personality to your website.
 
-- Read [about reference](https://diataxis.fr/reference/) in the Diátaxis framework
+## Features
 
+- Customizable icon or emoji
+- Adjustable trail length and spacing
+- Configurable animation speed
+- Smooth cursor following with physics-based animation
+- Automatically cleans up when cursor leaves the component area
 
-<Card title="Schau dir das an">
-  Interessante Inhalte, die du hervorheben möchtest.
+## Example
+
+<TextCursor text="⚛️" />
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `text` | string | `'⚛️'` | The icon or emoji to display in the trail |
+| `delay` | number | `0.01` | Animation delay between trail elements |
+| `spacing` | number | `100` | Spacing between trail elements in pixels |
+| `class` | string | `''` | Additional CSS classes |
+
+## Code Examples
+
+import { Tabs, TabItem, Code } from '@astrojs/starlight/components';
+import jsFileContent from '../../../js-components/text-animations/text-cursor.js?raw';
+
+<Tabs>
+  <TabItem label="Usage">
+  ```html
+  <text-cursor 
+    text="⚛️" 
+    delay="0.01"
+    spacing="100"
+  />
+  ```
+  </TabItem>
+  <TabItem label="Component Code">
+  <Code code={jsFileContent} lang="js" />
+  </TabItem>
+  <TabItem label="TBD - Component Code (Tailwind)"></TabItem>
+</Tabs>
+
+## Accessibility
+
+<Card title="Interaction Considerations">
+  This component is purely decorative and doesn't affect the functionality of the page. It respects the user's `prefers-reduced-motion` setting to minimize potential motion sickness issues.
 </Card>
-
-<TextCursor></TextCursor>

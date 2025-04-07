@@ -40,40 +40,95 @@ This document outlines the process of transforming React components with Framer 
         ```
 8.  **Document in MDX:**
     *   Create a corresponding MDX file in `src/content/docs/reference/` (e.g., `src/content/docs/reference/my-component-name.mdx`).
-    *   Document the component's usage, props (attributes), and provide examples, similar to `text-cursor.mdx`.
-    *   Make examples replayable by using the `ExampleWrapper` component:
-        1. Import the ExampleWrapper component at the top of your MDX file:
+    *   Follow this structure for your MDX documentation:
+
         ```mdx
         ---
         title: Component Name
-        description: Component description
+        description: Brief description of the component
         ---
 
         import { Card } from '@astrojs/starlight/components';
+        import MyComponent from '../../../components/my-component.astro';
         import ExampleWrapper from '../../../components/ExampleWrapper.astro';
-        ```
 
-        2. Use the ExampleWrapper component to wrap your web component examples:
-        ```mdx
-        <ExampleWrapper id="example-unique-id">
+        A detailed description of what the component does and its key features.
+
+        ## Features
+
+        - Feature 1
+        - Feature 2
+        - Feature 3
+        - Feature 4
+
+        ## Example
+
+        <MyComponent text="Example text" />
+
+        ## Props
+
+        | Prop | Type | Default | Description |
+        |------|------|---------|-------------|
+        | `text` | string | `''` | The text to display |
+        | `prop2` | number | `10` | Description of prop2 |
+        | `prop3` | boolean | `true` | Description of prop3 |
+
+        ## Code Examples
+
+        import { Tabs, TabItem, Code } from '@astrojs/starlight/components';
+        import jsFileContent from '../../../js-components/path-to-component.js?raw';
+
+        <Tabs>
+          <TabItem label="Usage">
+          ```html
+        <my-component 
+            text="Example text" 
+            prop2="10"
+            prop3="true"
+          ></my-component>
+          ```
+          </TabItem>
+          <TabItem label="Component Code">
+          <Code code={jsFileContent} lang="js" />
+          </TabItem>
+          <TabItem label="TBD - Component Code (Tailwind)"></TabItem>
+        </Tabs>
+
+        ## Examples with Different Settings
+
+        ### Example Variation 1
+
+        <ExampleWrapper id="example-variation-1">
           <my-component 
-            prop1="value1"
-            prop2="value2"
+            text="Example with different settings"
+            prop2="20"
           ></my-component>
         </ExampleWrapper>
-        ```
 
-        3. For components that need a different height, you can specify it:
-        ```mdx
-        <ExampleWrapper id="example-taller" height="600px">
-          <my-component></my-component>
+        ### Example Variation 2
+
+        <ExampleWrapper id="example-variation-2">
+          <my-component 
+            text="Another example variation"
+            prop3="false"
+          ></my-component>
         </ExampleWrapper>
+
+        ## Accessibility
+
+        <Card title="Accessibility Considerations">
+          Include any accessibility considerations or features here.
+        </Card>
         ```
 
-        * Use unique IDs for each example on the page (e.g., `example-letters`, `example-bottom`)
+    *   Important guidelines for MDX documentation:
+        * Place the Props table near the top of the file for better visibility
+        * Include a Code Examples section with tabs for Usage and Component Code
+        * Use the Astro component in the main Example section (e.g., `<MyComponent />`) 
+        * Use the web component in the ExampleWrapper sections (e.g., `<my-component></my-component>`)
+        * Use unique IDs for each example on the page (e.g., `example-variation-1`, `example-variation-2`)
         * Use kebab-case for attribute names in the web component (e.g., `animate-by` instead of `animateBy`)
-        * Use the web component tag directly (e.g., `<blur-text>` instead of `<BlurText>`)
-        * All attribute values should be strings (e.g., `delay="50"` instead of `delay={50}`)
+        * All attribute values in web components should be strings (e.g., `delay="50"` instead of `delay={50}`)
 
 ## Components to Transform (Initial Focus: TextAnimations)
 

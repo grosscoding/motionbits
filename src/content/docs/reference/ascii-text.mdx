@@ -5,8 +5,7 @@ description: Transform text into an interactive ASCII art display with 3D effect
 
 import { Card } from '@astrojs/starlight/components';
 import AsciiText from '../../../components/ascii-text.astro';
-
-# ASCII Text
+import ExampleWrapper from '../../../components/ExampleWrapper.astro';
 
 The ASCII Text component transforms regular text into an interactive ASCII art display with 3D effects. As you move your mouse over the component, the text reacts to your movements, creating a dynamic and engaging visual experience.
 
@@ -22,26 +21,40 @@ The ASCII Text component transforms regular text into an interactive ASCII art d
 
 <AsciiText text="ASCII" />
 
-## Usage
-
-```astro
----
-import AsciiText from '../components/ascii-text.astro';
----
-
-<AsciiText text="Hello" />
-```
-
 ## Props
 
 | Prop | Type | Default | Description |
 |------|------|---------|-------------|
-| `text` | `string` | `'ASCII'` | The text to display |
-| `asciiFontSize` | `number` | `8` | Font size of the ASCII characters |
-| `textFontSize` | `number` | `200` | Font size of the original text (affects the overall size) |
-| `textColor` | `string` | `'#fdf9f3'` | Color of the text |
-| `planeBaseHeight` | `number` | `8` | Base height of the 3D plane |
-| `enableWaves` | `boolean` | `true` | Enable wave animation effects |
+| `text` | string | `'ASCII'` | The text to display |
+| `asciiFontSize` | number | `8` | Font size of the ASCII characters |
+| `textFontSize` | number | `200` | Font size of the original text (affects the overall size) |
+| `textColor` | string | `'#fdf9f3'` | Color of the text |
+| `planeBaseHeight` | number | `8` | Base height of the 3D plane |
+| `enableWaves` | boolean | `true` | Enable wave animation effects |
+
+## Code Examples
+
+import { Tabs, TabItem, Code } from '@astrojs/starlight/components';
+import jsFileContent from '../../../js-components/text-animations/ascii-text.js?raw';
+
+<Tabs>
+  <TabItem label="Usage">
+  ```html
+  <ascii-text 
+    text="Hello World" 
+    asciiFontSize="8"
+    textFontSize="200"
+    textColor="#fdf9f3"
+    planeBaseHeight="8"
+    enableWaves="true"
+  ></ascii-text>
+  ```
+  </TabItem>
+  <TabItem label="Component Code">
+  <Code code={jsFileContent} lang="js" />
+  </TabItem>
+  <TabItem label="TBD - Component Code (Tailwind)"></TabItem>
+</Tabs>
 
 ## Examples with Different Settings
 

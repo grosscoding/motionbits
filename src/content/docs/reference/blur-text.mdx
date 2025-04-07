@@ -37,17 +37,13 @@ import jsFileContent from '../../../js-components/text-animations/blur-text.js?r
 
 <Tabs>
   <TabItem label="Usage">
-  ```astro
-  ---
-  import BlurText from '../components/blur-text.astro';
-  ---
-
-  <BlurText 
+  ```html
+  <blur-text 
     text="Your text here" 
-    animateBy="words"
+    animate-by="words"
     direction="top"
-    delay={50}
-  />
+    delay="50"
+  ></blur-text>
   ```
   </TabItem>
   <TabItem label="Component Code">
