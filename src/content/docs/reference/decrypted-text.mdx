@@ -1,0 +1,120 @@
+---
+title: Decrypted Text
+description: Text with a decryption/scrambling animation effect
+---
+
+import { Card } from '@astrojs/starlight/components';
+import DecryptedText from '../../../components/DecryptedText.astro';
+import ExampleWrapper from '../../../components/ExampleWrapper.astro';
+
+A component that displays text with a decryption/scrambling animation effect. The text appears to be encrypted and then gradually decrypts to reveal the original message. This creates a cyberpunk or hacker-style effect that's perfect for tech-themed interfaces.
+
+## Features
+
+- Text scrambling with customizable characters
+- Sequential or simultaneous decryption
+- Multiple reveal directions (start, end, center)
+- Customizable animation speed
+- Trigger on hover or when scrolled into view
+- Option to use only characters from the original text for scrambling
+
+## Example
+
+<ExampleWrapper id="decrypted-text">
+  <DecryptedText text="Decrypted Text Animation" sequential={true} animateOn="view" />
+</ExampleWrapper>
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `text` | string | required | The text to display and decrypt |
+| `speed` | number | `50` | Speed of the decryption animation in milliseconds |
+| `max-iterations` | number | `10` | Number of iterations for non-sequential mode |
+| `sequential` | boolean | `false` | Whether to reveal letters sequentially |
+| `reveal-direction` | string | `'start'` | Direction to reveal letters: 'start', 'end', or 'center' |
+| `use-original-chars-only` | boolean | `false` | Whether to use only characters from the original text |
+| `characters` | string | `'ABC...'` | Characters to use for scrambling |
+| `animate-on` | string | `'hover'` | When to trigger animation: 'hover' or 'view' |
+
+## Code Examples
+
+import { Tabs, TabItem, Code } from '@astrojs/starlight/components';
+import jsFileContent from '../../../js-components/text-animations/decrypted-text.js?raw';
+
+<Tabs>
+  <TabItem label="Usage">
+  ```html
+  <decrypted-text 
+    text="Decrypted Text Animation" 
+    speed="50"
+    max-iterations="10"
+    sequential="true"
+    reveal-direction="start"
+    use-original-chars-only="false"
+    animate-on="hover"
+  ></decrypted-text>
+  ```
+  </TabItem>
+  <TabItem label="Component Code">
+  <Code code={jsFileContent} lang="js" />
+  </TabItem>
+  <TabItem label="TBD - Component Code (Tailwind)"></TabItem>
+</Tabs>
+
+## Examples with Different Settings
+
+### Sequential Decryption from End
+
+<ExampleWrapper id="decrypted-text-end">
+  <decrypted-text 
+    text="Decryption from End" 
+    sequential="true"
+    reveal-direction="end"
+    animate-on="view"
+  ></decrypted-text>
+</ExampleWrapper>
+
+### Center Outward Decryption
+
+<ExampleWrapper id="decrypted-text-center">
+  <decrypted-text 
+    text="Center Outward Decryption" 
+    sequential="true"
+    reveal-direction="center"
+    animate-on="view"
+  ></decrypted-text>
+</ExampleWrapper>
+
+### Fast Simultaneous Decryption
+
+<ExampleWrapper id="decrypted-text-fast">
+  <decrypted-text 
+    text="Fast Simultaneous Decryption" 
+    sequential="false"
+    speed="20"
+    max-iterations="15"
+    animate-on="view"
+  ></decrypted-text>
+</ExampleWrapper>
+
+### Using Original Characters Only
+
+<ExampleWrapper id="decrypted-text-original-chars">
+  <decrypted-text 
+    text="Original Characters Only" 
+    sequential="true"
+    use-original-chars-only="true"
+    animate-on="view"
+  ></decrypted-text>
+</ExampleWrapper>
+
+## Accessibility
+
+<Card title="Accessibility Considerations">
+  - The component includes a visually hidden text element for screen readers
+  - The animated content is marked with `aria-hidden="true"` to prevent screen readers from reading scrambled text
+  - Consider using the `view` trigger option for users who may have difficulty with hover interactions
+  - Ensure sufficient color contrast between normal and encrypted text states
+  - For users with cognitive disabilities or those who are sensitive to motion, consider using slower animation speeds
+</Card>

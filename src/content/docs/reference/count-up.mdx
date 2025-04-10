@@ -1,0 +1,105 @@
+---
+title: Count Up
+description: Animates a number counting up or down with customizable settings
+---
+
+import { Card } from '@astrojs/starlight/components';
+import CountUp from '../../../components/CountUp.astro';
+import ExampleWrapper from '../../../components/ExampleWrapper.astro';
+
+A component that animates a number counting up or down from one value to another. The animation uses spring physics for a natural, dynamic feel and supports custom separators for better readability of large numbers.
+
+## Features
+
+- Animate counting up or down between any two numbers
+- Customizable animation duration and delay
+- Spring physics for natural animation feel
+- Optional thousands separator
+- Supports both positive and negative numbers
+- Intersection Observer integration for on-scroll animations
+
+## Example
+
+<ExampleWrapper id="count-up">
+  <CountUp from={0} to={1000} duration={2} />
+</ExampleWrapper>
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `from` | number | `0` | Starting value for the animation |
+| `to` | number | required | Ending value for the animation |
+| `direction` | string | `'up'` | Direction of counting: 'up' or 'down' |
+| `delay` | number | `0` | Delay before animation starts (in seconds) |
+| `duration` | number | `2` | Duration of the animation (in seconds) |
+| `separator` | string | `''` | Character to use as thousands separator |
+
+## Code Examples
+
+import { Tabs, TabItem, Code } from '@astrojs/starlight/components';
+import jsFileContent from '../../../js-components/text-animations/count-up.js?raw';
+
+<Tabs>
+  <TabItem label="Usage">
+  ```html
+  <count-up 
+    from="0" 
+    to="1000"
+    direction="up"
+    delay="0"
+    duration="2"
+    separator=","
+  ></count-up>
+  ```
+  </TabItem>
+  <TabItem label="Component Code">
+  <Code code={jsFileContent} lang="js" />
+  </TabItem>
+  <TabItem label="TBD - Component Code (Tailwind)"></TabItem>
+</Tabs>
+
+## Examples with Different Settings
+
+### Count Down with Comma Separator
+
+<ExampleWrapper id="count-down-comma">
+  <count-up 
+    from="10000" 
+    to="0"
+    direction="down"
+    duration="3"
+    separator=","
+  ></count-up>
+</ExampleWrapper>
+
+### Slow Count with Dot Separator
+
+<ExampleWrapper id="slow-count-dot">
+  <count-up 
+    from="0" 
+    to="5000"
+    duration="5"
+    separator="."
+  ></count-up>
+</ExampleWrapper>
+
+### Delayed Start
+
+<ExampleWrapper id="delayed-start">
+  <count-up 
+    from="0" 
+    to="500"
+    delay="1"
+    duration="1.5"
+  ></count-up>
+</ExampleWrapper>
+
+## Accessibility
+
+<Card title="Accessibility Considerations">
+  - The component uses semantic HTML elements for better screen reader support
+  - Animation duration can be adjusted for users who may need more time to process changing numbers
+  - Consider using ARIA live regions for important number changes that need to be announced by screen readers
+  - For users with cognitive disabilities, consider using slower animations and clear separators for large numbers
+</Card>

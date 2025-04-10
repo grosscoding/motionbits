@@ -1,0 +1,94 @@
+---
+title: Circular Text
+description: Displays text in a circular pattern with animation
+---
+
+import { Card } from '@astrojs/starlight/components';
+import CircularText from '../../../components/CircularText.astro';
+import ExampleWrapper from '../../../components/ExampleWrapper.astro';
+
+A component that displays text in a circular pattern with continuous rotation animation. The text is arranged in a circle, with each letter positioned at equal intervals around the circumference. The animation can be modified on hover with different behaviors.
+
+## Features
+
+- Arranges text in a perfect circle
+- Continuous rotation animation
+- Interactive hover effects with multiple options
+- Customizable animation speed
+- Responsive design
+
+## Example
+
+<ExampleWrapper id="circular-text">
+  <CircularText text="CIRCULAR•TEXT•ANIMATION•" onHover='slowDown'/>
+</ExampleWrapper>
+
+## Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `text` | string | `''` | The text to display in a circle |
+| `spin-duration` | number | `20` | Duration of the spin animation in seconds |
+| `on-hover` | string | `'speedUp'` | Behavior on hover: 'speedUp', 'slowDown', 'pause', 'goBonkers' |
+
+## Code Examples
+
+import { Tabs, TabItem, Code } from '@astrojs/starlight/components';
+import jsFileContent from '../../../js-components/text-animations/circular-text.js?raw';
+
+<Tabs>
+  <TabItem label="Usage">
+  ```html
+  <circular-text 
+    text="CIRCULAR•TEXT•ANIMATION•" 
+    spin-duration="20"
+    on-hover="speedUp"
+  ></circular-text>
+  ```
+  </TabItem>
+  <TabItem label="Component Code">
+  <Code code={jsFileContent} lang="js" />
+  </TabItem>
+  <TabItem label="TBD - Component Code (Tailwind)"></TabItem>
+</Tabs>
+
+## Examples with Different Settings
+
+### Slow Rotation with Pause on Hover
+
+<ExampleWrapper id="circular-text-slow-pause">
+  <circular-text 
+    text="SLOW•ROTATION•PAUSE•ON•HOVER•" 
+    spin-duration="40"
+    on-hover="pause"
+  ></circular-text>
+</ExampleWrapper>
+
+### Fast Rotation with Go Bonkers on Hover
+
+<ExampleWrapper id="circular-text-fast-bonkers">
+  <circular-text 
+    text="FAST•ROTATION•GO•BONKERS•" 
+    spin-duration="10"
+    on-hover="goBonkers"
+  ></circular-text>
+</ExampleWrapper>
+
+### Medium Rotation with Slow Down on Hover
+
+<ExampleWrapper id="circular-text-medium-slowdown">
+  <circular-text 
+    text="MEDIUM•SLOW•DOWN•ON•HOVER•" 
+    spin-duration="15"
+    on-hover="slowDown"
+  ></circular-text>
+</ExampleWrapper>
+
+## Accessibility
+
+<Card title="Accessibility Considerations">
+  - The circular text is decorative and may be difficult to read for some users
+  - Consider providing an alternative text representation for screen readers
+  - Ensure sufficient color contrast between the text and background
+  - Users with motion sensitivity may prefer reduced motion - consider adding a media query to respect user preferences: `@media (prefers-reduced-motion: reduce)`
+</Card>

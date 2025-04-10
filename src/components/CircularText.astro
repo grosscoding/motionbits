@@ -1,0 +1,36 @@
+---
+/**
+ * CircularText component - Displays text in a circular pattern with animation
+ * 
+ * @prop {string} text - The text to display in a circle
+ * @prop {number} spinDuration - Duration of the spin animation in seconds (default: 20)
+ * @prop {string} onHover - Behavior on hover: 'speedUp', 'slowDown', 'pause', 'goBonkers' (default: 'speedUp')
+ * @prop {string} className - Additional CSS classes to apply
+ */
+
+interface Props {
+  text: string;
+  spinDuration?: number;
+  onHover?: 'speedUp' | 'slowDown' | 'pause' | 'goBonkers';
+  className?: string;
+}
+
+const { 
+  text, 
+  spinDuration = 20, 
+  onHover = 'speedUp',
+  className = '' 
+} = Astro.props;
+---
+
+<circular-text 
+  class={className}
+  text={text}
+  spin-duration={spinDuration}
+  on-hover={onHover}
+></circular-text>
+
+<script>
+  // Import the web component
+  import '../js-components/text-animations/circular-text.js';
+</script>

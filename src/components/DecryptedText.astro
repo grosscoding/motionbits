@@ -1,0 +1,56 @@
+---
+/**
+ * DecryptedText component - Displays text with a decryption/scrambling animation effect
+ * 
+ * @prop {string} text - The text to display and decrypt
+ * @prop {number} speed - Speed of the decryption animation in milliseconds
+ * @prop {number} maxIterations - Number of iterations for non-sequential mode
+ * @prop {boolean} sequential - Whether to reveal letters sequentially
+ * @prop {string} revealDirection - Direction to reveal letters: 'start', 'end', or 'center'
+ * @prop {boolean} useOriginalCharsOnly - Whether to use only characters from the original text
+ * @prop {string} characters - Characters to use for scrambling
+ * @prop {string} animateOn - When to trigger animation: 'hover' or 'view'
+ * @prop {string} className - Additional CSS classes to apply
+ */
+
+interface Props {
+  text: string;
+  speed?: number;
+  maxIterations?: number;
+  sequential?: boolean;
+  revealDirection?: 'start' | 'end' | 'center';
+  useOriginalCharsOnly?: boolean;
+  characters?: string;
+  animateOn?: 'hover' | 'view';
+  className?: string;
+}
+
+const { 
+  text, 
+  speed = 50, 
+  maxIterations = 10,
+  sequential = false,
+  revealDirection = 'start',
+  useOriginalCharsOnly = false,
+  characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()_+',
+  animateOn = 'hover',
+  className = '' 
+} = Astro.props;
+---
+
+<decrypted-text 
+  class={className}
+  text={text}
+  speed={speed}
+  max-iterations={maxIterations}
+  sequential={sequential.toString()}
+  reveal-direction={revealDirection}
+  use-original-chars-only={useOriginalCharsOnly.toString()}
+  characters={characters}
+  animate-on={animateOn}
+></decrypted-text>
+
+<script>
+  // Import the web component
+  import '../js-components/text-animations/decrypted-text.js';
+</script>
